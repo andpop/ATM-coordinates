@@ -1,0 +1,181 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.review__form {
+    font-size: 12px;
+    position: absolute;
+    top: 100px;
+    left: 200px;
+    height: 530px;
+    width: 380px;
+    background-color: #fff;
+    z-index: 1000;
+    border-radius: 10px;
+    /*padding: 5px 5px 5px 10px;*/
+    display: none;
+}
+
+.review__title {
+    font-size: 12px;
+    font-weight: 300;
+    height: 44px;
+    width: 100%;
+    background-color: #ff8563;
+    border-radius: 10px 10px 0 0;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    /*padding: 10px 3px 3px 10px;*/
+    /*min-height: 20px;*/
+    /*line-height: 1;*/
+}
+
+.fa {
+    display: block;
+    font: normal normal normal 16px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+
+.fa-times {
+    cursor: pointer;
+}
+
+.reviews__container {
+    color: #4f4f4f;
+    font-size: 16px;
+    margin: 15px 10px 15px 15px;
+    height: 170px;
+    overflow-y: auto;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+.username {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.place, .date {
+    color: #4f4f4f;
+    font-weight: 400;
+}
+
+.review-text {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 22px;
+}
+
+.new-review {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.review__label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ff8563;
+}
+
+.review__item {
+    padding: 5px 8px;
+    margin-top: 15px;
+    border: 1px solid #c4c4c4;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    width: 100%;
+}
+
+.review__item--input {
+    height: 32px;
+}
+
+.review__item--textarea {
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.button {
+    cursor: pointer;
+    width: 87px;
+    height: 30px;
+    color: #ffffff;
+    border-radius: 8px;
+    background-color: #ff8663;
+    border: none;
+    float: right;
+    outline: none;
+    font-size: 12px;
+}
+
+.balloon__header,
+.balloon__body,
+.balloon__footer
+{
+    font-size: 12px;
+}
+
+.balloon__body {
+    max-height: 70px;
+    overflow-y: auto;
+}
+
+.balloon__footer {
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    color: #999;
+}
+
+.balloon__place {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.balloon__address {
+    color:blue;
+    text-decoration: underline;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
