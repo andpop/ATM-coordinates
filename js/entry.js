@@ -2,27 +2,32 @@ import sourceAtmAddresses from '../data/atm_adresses';
 
 ymaps.ready(init);
 
-function addCoordsToAtm(atm, index) {
-    let atmWithCoords = {};
+function getCoordsForAtm(atm, index) {
+    return new Promise((resolve, reject) => {
+        ymaps.geocode(`${atm.city},${atm.address}`)
+            .then(res => {
+                let atmWithCoords = {},
+                    firstGeoObject = res.geoObjects.get(0),
+                    coords = firstGeoObject.geometry.getCoordinates(),
+                    address = firstGeoObject.getAddressLine();
 
-    atmWithCoords.id = atm.ID;
-    atmWithCoords.address = atm.address;
-    atmWithCoords.place = atm.place;
-    atmWithCoords.category = atm.category;
-    ymaps.geocode(`${atm.city},${atm.address}`)
-        .then(res => {
-            let firstGeoObject = res.geoObjects.get(0),
-                coords = firstGeoObject.geometry.getCoordinates(),
-                address = firstGeoObject.getAddressLine();
+                atmWithCoords.id = atm.ID;
+                atmWithCoords.address = atm.address;
+                atmWithCoords.place = atm.place;
+                atmWithCoords.category = atm.category;
+                atmWithCoords.normalAddress = address;
+                atmWithCoords.latitude = coords[0];
+                atmWithCoords.longitude = coords[1];
 
-            atmWithCoords.normalAddress = address;
-            atmWithCoords.latitude = coords[0];
-            atmWithCoords.longitude = coords[1];
-        })
-        .catch(err => console.error(`${index}: ${atm.full_address}: ${err}`));
-
-    return atmWithCoords;
+                resolve(atmWithCoords);
+            })
+            .catch(err => {
+                console.error(`${index}: ${atm.full_address}: ${err}`);
+                reject(`${index}: ${atm.full_address}: ${err}`);
+            });
+    });
 }
+
 
 function makeAtmLi(atmList) {
     let atmLi = '';
@@ -66,9 +71,34 @@ function init () {
     });
     myMap.geoObjects.add(clusterer);
 
-    let targetAtmList = sourceAtmAddresses.map((atm, index) => addCoordsToAtm(atm, index));
-    // console.log("target=", targetAtmList);
-    atmList.innerHTML = makeAtmLi(targetAtmList);
+    // getCoordsForAtm(sourceAtmAddresses[0], 0)
+    //     .then(atm => {
+    //         console.log(atm.latitude, atm.longitude, atm.address);
+    //         return getCoordsForAtm(sourceAtmAddresses[1], 1);
+    //         })
+    //     .then(atm => {
+    //             console.log(atm.latitude, atm.longitude, atm.address);
+    //             return getCoordsForAtm(sourceAtmAddresses[2], 2);
+    //         })
+    //     .then(atm => {
+    //             console.log(atm.latitude, atm.longitude, atm.address);
+    //             return getCoordsForAtm(sourceAtmAddresses[3], 3);
+    //         })
+    //     .catch(error => console.log(error));
+
+    let atmPromiseArray = [];
+
+    sourceAtmAddresses.forEach((atm, index) => {
+        atmPromiseArray.push(getCoordsForAtm(atm, index));
+    });
+
+
+    Promise.all(atmPromiseArray)
+        .then(targetAtmList => {
+            console.log(targetAtmList);
+            atmList.innerHTML = makeAtmLi(targetAtmList);
+        });
+
 
     // ymaps.geocode('Саранск, ул. Степана Разина,17, Регистрационная палата')
     // ymaps.geocode('Саранск, ул. Степана Разина,17, Регистрационная палата')
