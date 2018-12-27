@@ -1,6 +1,6 @@
 import sourceAtmAddresses from '../data/atm_adresses';
-require("babel-core/register");
-require("babel-polyfill");
+// require("babel-core/register");
+// require("babel-polyfill");
 
 ymaps.ready(init);
 

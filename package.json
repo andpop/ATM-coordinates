@@ -17,11 +17,16 @@
   },
   "homepage": "https://github.com/andpop/ATM-coordinates#readme",
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.2.0"
   }
 }
